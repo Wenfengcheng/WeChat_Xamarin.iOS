@@ -1,8 +1,13 @@
 # WeChat_Xamarin.iOS
 
+[![Version Status](https://img.shields.io/cocoapods/v/WechatOpenSDK.svg?style=flat)](http://cocoadocs.org/docsets/WechatOpenSDK)
+
 WeChat binding for Xamarin.iOS
 
 Port of Xamarin iOS of the [WeChat](https://open.weixin.qq.com/cgi-bin/index?t=home/index&lang=en_US)
+
+## NuGet
+* [Xamarin.iOS.WeChat](https://www.nuget.org/packages/Xamarin.iOS.WeChat) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat)
 
 ### Features
 

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Foundation;
 using UIKit;
 
 namespace Sample
@@ -19,6 +19,15 @@ namespace Sample
             this.View.BackgroundColor = UIColor.Red;
             System.Diagnostics.Debug.WriteLine(weChat.CurrentVersion);
             // Perform any additional setup after loading the view, typically from a nib.
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            if(UIApplication.SharedApplication.CanOpenUrl(NSUrl.FromString("weixin://")))
+            {
+                weChat.SendText("Hello xamarin!");
+            }
         }
 
         public override void DidReceiveMemoryWarning()

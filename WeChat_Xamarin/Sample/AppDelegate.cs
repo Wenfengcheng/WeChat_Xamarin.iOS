@@ -23,7 +23,7 @@ namespace Sample
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
-            WeChat.Register("wx3f94d21d67c4ae76");
+            WeChat.Register("wx617c77c82218ea2c");
             //WeChat.Register("Your - App - Id");
             return true;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Foundation;
+using UIKit;
 using WeChat;
 
 namespace Sample
@@ -59,7 +60,7 @@ namespace Sample
             {
                 Text = text,
                 BText = true,
-                Scene = 1
+                Scene = scene
             };
             return WXApi.SendReq(req);
         }

@@ -87,8 +87,17 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\Contents.json" />
+	<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-notification%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-notification%403x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-settings%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-settings%403x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-spotlight%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-spotlight%403x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-appicon%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iphone-appicon%403x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ios-marketing.png" />
+    	<ImageAsset Include="Assets.xcassets\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

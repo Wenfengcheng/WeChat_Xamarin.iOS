@@ -90,19 +90,19 @@ namespace Sample
                 {
                     System.Diagnostics.Debug.WriteLine("iOS wechat onResp auth");
                 }
-                else if (resp is PayResp)
-                {
-                    System.Diagnostics.Debug.WriteLine("iOS wechat onResp pay success");
+                //else if (resp is PayResp)
+                //{
+                //    System.Diagnostics.Debug.WriteLine("iOS wechat onResp pay success");
 
-                }
+                //}
             }
             else
             {
-                if (resp is PayResp)
-                {
-                    System.Diagnostics.Debug.WriteLine("iOS wechat onResp pay failed");
+                //if (resp is PayResp)
+                //{
+                //    System.Diagnostics.Debug.WriteLine("iOS wechat onResp pay failed");
 
-                }
+                //}
             }
         }
     }

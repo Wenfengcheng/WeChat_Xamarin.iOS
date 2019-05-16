@@ -945,6 +945,8 @@ namespace WeChat
     /// 接收并处理来自微信终端程序的事件消息，期间微信界面会切换到第三方应用程序。
     /// </summary>
     // @protocol WXApiDelegate <NSObject>
+    partial interface IWXApiDelegate { }
+
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WXApiDelegate
@@ -969,6 +971,8 @@ namespace WeChat
     }
 
     // @protocol WXApiLogDelegate <NSObject>
+    partial interface IWXApiLogDelegate { }
+
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WXApiLogDelegate
@@ -1025,7 +1029,7 @@ namespace WeChat
         // +(BOOL)handleOpenURL:(NSURL *)url delegate:(id<WXApiDelegate>)delegate;
         [Static]
         [Export("handleOpenURL:delegate:")]
-        bool HandleOpenURL(NSUrl url, WXApiDelegate @delegate);
+        bool HandleOpenURL(NSUrl url, IWXApiDelegate @delegate);
 
         /// <summary>
         /// 检查微信是否已被用户安装
@@ -1086,7 +1090,7 @@ namespace WeChat
         // +(BOOL)sendAuthReq:(SendAuthReq *)req viewController:(UIViewController *)viewController delegate:(id<WXApiDelegate>)delegate;
         [Static]
         [Export("sendAuthReq:viewController:delegate:")]
-        bool SendAuthReq(SendAuthReq req, UIViewController viewController, WXApiDelegate @delegate);
+        bool SendAuthReq(SendAuthReq req, UIViewController viewController, IWXApiDelegate @delegate);
 
         /// <summary>
         /// 收到微信onReq的请求，发送对应的应答给微信，并切换到微信界面
@@ -1119,7 +1123,7 @@ namespace WeChat
         // +(void)startLogByLevel:(WXLogLevel)level logDelegate:(id<WXApiLogDelegate>)logDelegate;
         [Static]
         [Export("startLogByLevel:logDelegate:")]
-        void StartLogByLevel(WXLogLevel level, WXApiLogDelegate logDelegate);
+        void StartLogByLevel(WXLogLevel level, IWXApiLogDelegate logDelegate);
 
         /// <summary>
         /// 停止打印log，会清理block或者delegate为空，释放block
@@ -1131,6 +1135,8 @@ namespace WeChat
     }
 
     // @protocol WechatAuthAPIDelegate <NSObject>
+    partial interface IWechatAuthAPIDelegate { }
+
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WechatAuthAPIDelegate
@@ -1162,7 +1168,7 @@ namespace WeChat
     interface WechatAuthSDK
     {
         [Wrap("WeakDelegate")]
-        WechatAuthAPIDelegate Delegate { get; set; }
+        IWechatAuthAPIDelegate Delegate { get; set; }
 
         // @property (nonatomic, weak) id<WechatAuthAPIDelegate> delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]

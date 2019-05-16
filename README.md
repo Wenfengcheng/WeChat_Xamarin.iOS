@@ -8,6 +8,7 @@ Port of Xamarin iOS of the [WeChat](https://open.weixin.qq.com/cgi-bin/index?t=h
 
 ## NuGet
 * [Xamarin.iOS.WeChat](https://www.nuget.org/packages/Xamarin.iOS.WeChat) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat)
+* [Xamarin.iOS.WeChat.NoPay](https://www.nuget.org/packages/Xamarin.iOS.WeChat.NoPay) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.NoPay.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat.NoPay)
 
 ### Features
 

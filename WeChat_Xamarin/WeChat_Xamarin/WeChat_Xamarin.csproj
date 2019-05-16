@@ -11,17 +11,17 @@
     <AssemblyName>WeChat_Xamarin</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <PackageId>Xamarin.iOS.WeChat</PackageId>
-    <PackageVersion>1.8.3</PackageVersion>
+    <PackageVersion>1.8.3.2</PackageVersion>
     <Authors>WenfengCheng</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Owners>WenfengCheng, Funky_Xamarin</Owners>
     <PackageProjectUrl>https://github.com/Wenfengcheng/WeChat_Xamarin.iOS</PackageProjectUrl>
-    <PackageReleaseNotes>Release WeChat_Xamarin.iOS 1.8.3</PackageReleaseNotes>
+    <PackageReleaseNotes>Release WeChat_Xamarin.iOS 1.8.3.2</PackageReleaseNotes>
     <Summary>Xamarin.iOS Binding Library - WeChat</Summary>
     <PackageTags>Xamarin.iOS,  Xamarin, WeChat, Share, Payment, Auth</PackageTags>
     <Title>Funky - WeChat</Title>
-    <Description>Xamarin.iOS.WeChat</Description>
+    <Description>Xamarin.iOS.WeChat with payment</Description>
     <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\WeChat_Xamarin.xml</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

@@ -62,7 +62,7 @@ namespace WeChat
     /// <summary>
     /// 应用支持接收微信的文件类型
     /// </summary>
-    public enum enAppSupportContentFlag : ulong
+    public enum EnAppSupportContentFlag : ulong
     {
         Nocontent = 0,
         Text = 1,
@@ -83,6 +83,7 @@ namespace WeChat
     /// <summary>
     /// log的级别
     /// </summary>
+    [Native]
     public enum WXLogLevel : long
     {
         Normal = 0, // 打印日常的日志

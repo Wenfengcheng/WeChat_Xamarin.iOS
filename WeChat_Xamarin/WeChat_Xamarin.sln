@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat_Xamarin", "WeChat_Xa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{B73DB5DC-519B-4117-8DF6-683B429AC1A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat", "WeChat\WeChat.csproj", "{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,5 +41,17 @@ Global
 		{B73DB5DC-519B-4117-8DF6-683B429AC1A3}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{B73DB5DC-519B-4117-8DF6-683B429AC1A3}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{B73DB5DC-519B-4117-8DF6-683B429AC1A3}.Debug|iPhone.Build.0 = Debug|iPhone
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Release|iPhone.Build.0 = Release|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1137,6 +1137,7 @@ namespace WeChat
     // @protocol WechatAuthAPIDelegate <NSObject>
     partial interface IWechatAuthAPIDelegate { }
 
+
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WechatAuthAPIDelegate

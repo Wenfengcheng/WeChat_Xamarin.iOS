@@ -24,20 +24,20 @@ namespace Sample
         /// </summary>
         public bool Register(string appId)
         {
-            return WXApi.RegisterApp(appId);
+            return WXApi.RegisterApp(appId, "[Your-Universal-Links]");
         }
 
         /// <summary>
         /// Sends the auth request.
         /// </summary>
-        public bool SendAuthRequest(string scope, string state)
+        public void SendAuthRequest(string scope, string state)
         {
             SendAuthReq req = new SendAuthReq()
             {
                 Scope = scope,
                 State = state
             };
-            return WXApi.SendReq(req);
+            WXApi.SendReq(req, null);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Sample
         /// </summary>
         /// <param name="text">消息内容.</param>
         /// <param name="scene">发送场景(可以选择发送到会话(Session), 朋友圈(Timeline), 收藏(Favorite), 指定联系人(SpecifiedSession)。 默认发送到会话)</param>
-        public bool SendText(string text, int scene = 0)
+        public void SendText(string text, int scene = 0)
         {
             SendMessageToWXReq req = new SendMessageToWXReq()
             {
@@ -62,8 +62,9 @@ namespace Sample
                 BText = true,
                 Scene = scene
             };
-            return WXApi.SendReq(req);
+            WXApi.SendReq(req, null);
         }
+
 
         /// <summary>
         /// 请求打开微信。

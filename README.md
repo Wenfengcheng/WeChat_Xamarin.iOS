@@ -4,7 +4,7 @@
 
 WeChat binding for Xamarin.iOS
 
-Port of Xamarin iOS of the [WeChat](https://open.weixin.qq.com/cgi-bin/index?t=home/index&lang=en_US)
+Port of Xamarin iOS of the [WeChat](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html)
 
 ## NuGet
 * [Xamarin.iOS.WeChat](https://www.nuget.org/packages/Xamarin.iOS.WeChat) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat)

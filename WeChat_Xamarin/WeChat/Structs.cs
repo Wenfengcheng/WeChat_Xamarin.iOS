@@ -42,25 +42,7 @@ namespace WeChat
 
     public enum WXMPWebviewType : uint
     {
-        WXMPWebviewType_Ad = 0
-    }
-
-    public enum EnAppSupportContentFlag : ulong
-    {
-        Nocontent = 0,
-        Text = 1,
-        Picture = 2,
-        Location = 4,
-        Video = 8,
-        Audio = 16,
-        Webpage = 32,
-        Doc = 64,
-        Docx = 128,
-        Ppt = 256,
-        Pptx = 512,
-        Xls = 1024,
-        Xlsx = 2048,
-        Pdf = 4096
+        Ad = 0
     }
 
     [Native]

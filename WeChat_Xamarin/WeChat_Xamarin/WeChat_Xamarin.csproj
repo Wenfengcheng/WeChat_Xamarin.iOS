@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
@@ -11,13 +11,13 @@
     <AssemblyName>WeChat_Xamarin</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <PackageId>Xamarin.iOS.WeChat</PackageId>
-    <PackageVersion>1.8.3.2</PackageVersion>
+    <PackageVersion>1.8.6.1</PackageVersion>
     <Authors>WenfengCheng</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Owners>WenfengCheng, Funky_Xamarin</Owners>
     <PackageProjectUrl>https://github.com/Wenfengcheng/WeChat_Xamarin.iOS</PackageProjectUrl>
-    <PackageReleaseNotes>Release WeChat_Xamarin.iOS 1.8.3.2</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgrade WeChat_Xamarin.iOS binding to 1.8.6.1</PackageReleaseNotes>
     <Summary>Xamarin.iOS Binding Library - WeChat</Summary>
     <PackageTags>Xamarin.iOS,  Xamarin, WeChat, Share, Payment, Auth</PackageTags>
     <Title>Funky - WeChat</Title>

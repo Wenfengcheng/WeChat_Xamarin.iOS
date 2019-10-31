@@ -120,9 +120,9 @@
     <Compile Include="WeChatApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WeChat_Xamarin\WeChat_Xamarin.csproj">
-      <Project>{4E818858-CB20-4ECD-B4C7-BF921B47C2D0}</Project>
-      <Name>WeChat_Xamarin</Name>
+    <ProjectReference Include="..\WeChat\WeChat.csproj">
+      <Project>{05A3BE48-C1B9-4E57-B37F-535DF0080A6B}</Project>
+      <Name>WeChat</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

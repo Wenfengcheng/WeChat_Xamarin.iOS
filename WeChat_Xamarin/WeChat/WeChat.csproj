@@ -12,13 +12,13 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>WeChat</AssemblyName>
     <PackageId>Xamarin.iOS.WeChat.NoPay</PackageId>
-    <PackageVersion>1.8.3</PackageVersion>
+    <PackageVersion>1.8.6.1</PackageVersion>
     <Authors>WenfengCheng</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Owners>WenfengCheng, Funky_Xamarin</Owners>
     <PackageProjectUrl>https://github.com/Wenfengcheng/WeChat_Xamarin.iOS</PackageProjectUrl>
-    <PackageReleaseNotes>Release WeChat_Xamarin.iOS binding</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgrade WeChat_Xamarin.iOS binding to 1.8.6.1</PackageReleaseNotes>
     <Summary>Xamarin.iOS Binding Library - WeChat</Summary>
     <PackageTags>Xamarin.iOS,  Xamarin, WeChat, Share, Auth</PackageTags>
     <Title>Funky - WeChat</Title>

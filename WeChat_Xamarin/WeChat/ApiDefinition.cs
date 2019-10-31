@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using System;
+using Foundation;
 using ObjCRuntime;
 using UIKit;
 
@@ -10,85 +11,67 @@ namespace WeChat
     // typedef void (^WXLogBolock)(NSString *);
     delegate void WXLogBolock(string arg0);
 
-    /// <summary>
-    /// 该类为微信终端SDK所有请求类的基类
-    /// </summary>
     // @interface BaseReq : NSObject
     [BaseType(typeof(NSObject))]
     interface BaseReq
     {
-        /** 请求类型 */
         // @property (assign, nonatomic) int type;
         [Export("type")]
         int Type { get; set; }
 
-        /** 由用户微信号和AppID组成的唯一标识，发送请求时第三方程序必须填写，用于校验微信用户是否换号登录*/
-        // @property (retain, nonatomic) NSString * openID;
-        [Export("openID", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull openID;
+        [Export("openID")]
         string OpenID { get; set; }
     }
 
-    /// <summary>
-    /// 该类为微信终端SDK所有响应类的基类
-    /// </summary>
     // @interface BaseResp : NSObject
     [BaseType(typeof(NSObject))]
     interface BaseResp
     {
-        /** 错误码 */
         // @property (assign, nonatomic) int errCode;
         [Export("errCode")]
         int ErrCode { get; set; }
 
-        /** 错误提示字符串 */
-        // @property (retain, nonatomic) NSString * errStr;
-        [Export("errStr", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull errStr;
+        [Export("errStr")]
         string ErrStr { get; set; }
 
-        /** 响应类型 */
         // @property (assign, nonatomic) int type;
         [Export("type")]
         int Type { get; set; }
     }
 
-    /// <summary>
-    /// 第三方程序要向微信申请认证，并请求某些权限，需要调用WXApi的sendReq成员函数，向微信终端发送一个SendAuthReq消息结构。微信终端处理完后会向第三方程序发送一个处理结果。
-    /// </summary>
     // @interface SendAuthReq : BaseReq
     [BaseType(typeof(BaseReq))]
     interface SendAuthReq
     {
-        // @property (retain, nonatomic) NSString * scope;
-        [Export("scope", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull scope;
+        [Export("scope")]
         string Scope { get; set; }
 
-        /** 第三方程序本身用来标识其请求的唯一性，最后跳转回第三方程序时，由微信终端回传。*/
-        // @property (retain, nonatomic) NSString * state;
-        [Export("state", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull state;
+        [Export("state")]
         string State { get; set; }
     }
 
-    /// <summary>
-    /// 微信处理完第三方程序的认证和权限申请后向第三方程序回送的处理结果。
-    /// </summary>
     // @interface SendAuthResp : BaseResp
     [BaseType(typeof(BaseResp))]
     interface SendAuthResp
     {
-        // @property (retain, nonatomic) NSString * code;
-        [Export("code", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable code;
+        [NullAllowed, Export("code")]
         string Code { get; set; }
 
-        // @property (retain, nonatomic) NSString * state;
-        [Export("state", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable state;
+        [NullAllowed, Export("state")]
         string State { get; set; }
 
-        // @property (retain, nonatomic) NSString * lang;
-        [Export("lang", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable lang;
+        [NullAllowed, Export("lang")]
         string Lang { get; set; }
 
-        // @property (retain, nonatomic) NSString * country;
-        [Export("country", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable country;
+        [NullAllowed, Export("country")]
         string Country { get; set; }
     }
 
@@ -96,29 +79,24 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface SendMessageToWXReq
     {
-        /**     发送消息的文本内容   */
-        // @property (retain, nonatomic) NSString * text;
-        [Export("text", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull text;
+        [Export("text")]
         string Text { get; set; }
 
-        /**     发送消息的多媒体内容   */
-        // @property (retain, nonatomic) WXMediaMessage * message;
-        [Export("message", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) WXMediaMessage * _Nonnull message;
+        [Export("message", ArgumentSemantic.Strong)]
         WXMediaMessage Message { get; set; }
 
-        /**     发送消息的类型，包括文本消息和多媒体消息两种，两者只能选择其一，不能同时发送文本和多媒体消息   */
         // @property (assign, nonatomic) BOOL bText;
         [Export("bText")]
         bool BText { get; set; }
 
-        /**     发送的目标场景，可以选择发送到会话(WXSceneSession)或者朋友圈(WXSceneTimeline)。 默认发送到会话   */
         // @property (assign, nonatomic) int scene;
         [Export("scene")]
         int Scene { get; set; }
 
-        /**     指定发送消息的人，WXSceneSpecifiedSession时有效   */
-        // @property (retain, nonatomic) NSString * toUserOpenId;
-        [Export("toUserOpenId", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable toUserOpenId;
+        [NullAllowed, Export("toUserOpenId")]
         string ToUserOpenId { get; set; }
     }
 
@@ -126,12 +104,12 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface SendMessageToWXResp
     {
-        // @property (retain, nonatomic) NSString * lang;
-        [Export("lang", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull lang;
+        [Export("lang")]
         string Lang { get; set; }
 
-        // @property (retain, nonatomic) NSString * country;
-        [Export("country", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull country;
+        [Export("country")]
         string Country { get; set; }
     }
 
@@ -139,12 +117,12 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface GetMessageFromWXReq
     {
-        // @property (retain, nonatomic) NSString * lang;
-        [Export("lang", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSString * _Nonnull lang;
+        [Export("lang", ArgumentSemantic.Strong)]
         string Lang { get; set; }
 
-        // @property (retain, nonatomic) NSString * country;
-        [Export("country", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSString * _Nonnull country;
+        [Export("country", ArgumentSemantic.Strong)]
         string Country { get; set; }
     }
 
@@ -152,12 +130,12 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface GetMessageFromWXResp
     {
-        // @property (retain, nonatomic) NSString * text;
-        [Export("text", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSString * _Nonnull text;
+        [Export("text", ArgumentSemantic.Strong)]
         string Text { get; set; }
 
-        // @property (retain, nonatomic) WXMediaMessage * message;
-        [Export("message", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) WXMediaMessage * _Nonnull message;
+        [Export("message", ArgumentSemantic.Strong)]
         WXMediaMessage Message { get; set; }
 
         // @property (assign, nonatomic) BOOL bText;
@@ -169,16 +147,16 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface ShowMessageFromWXReq
     {
-        // @property (retain, nonatomic) WXMediaMessage * message;
-        [Export("message", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) WXMediaMessage * _Nonnull message;
+        [Export("message", ArgumentSemantic.Strong)]
         WXMediaMessage Message { get; set; }
 
-        // @property (retain, nonatomic) NSString * lang;
-        [Export("lang", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull lang;
+        [Export("lang")]
         string Lang { get; set; }
 
-        // @property (retain, nonatomic) NSString * country;
-        [Export("country", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull country;
+        [Export("country")]
         string Country { get; set; }
     }
 
@@ -192,44 +170,25 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface LaunchFromWXReq
     {
-        // @property (retain, nonatomic) WXMediaMessage * message;
-        [Export("message", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) WXMediaMessage * _Nonnull message;
+        [Export("message", ArgumentSemantic.Strong)]
         WXMediaMessage Message { get; set; }
 
-        // @property (retain, nonatomic) NSString * lang;
-        [Export("lang", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull lang;
+        [Export("lang")]
         string Lang { get; set; }
 
-        // @property (retain, nonatomic) NSString * country;
-        [Export("country", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull country;
+        [Export("country")]
         string Country { get; set; }
-    }
-
-    // @interface OpenTempSessionReq : BaseReq
-    [BaseType(typeof(BaseReq))]
-    interface OpenTempSessionReq
-    {
-        // @property (retain, nonatomic) NSString * username;
-        [Export("username", ArgumentSemantic.Retain)]
-        string Username { get; set; }
-
-        // @property (retain, nonatomic) NSString * sessionFrom;
-        [Export("sessionFrom", ArgumentSemantic.Retain)]
-        string SessionFrom { get; set; }
-    }
-
-    // @interface OpenTempSessionResp : BaseResp
-    [BaseType(typeof(BaseResp))]
-    interface OpenTempSessionResp
-    {
     }
 
     // @interface OpenWebviewReq : BaseReq
     [BaseType(typeof(BaseReq))]
     interface OpenWebviewReq
     {
-        // @property (retain, nonatomic) NSString * url;
-        [Export("url", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull url;
+        [Export("url")]
         string Url { get; set; }
     }
 
@@ -247,8 +206,8 @@ namespace WeChat
         [Export("businessType")]
         uint BusinessType { get; set; }
 
-        // @property (retain, nonatomic) NSDictionary * queryInfoDic;
-        [Export("queryInfoDic", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSDictionary * _Nullable queryInfoDic;
+        [NullAllowed, Export("queryInfoDic", ArgumentSemantic.Strong)]
         NSDictionary QueryInfoDic { get; set; }
     }
 
@@ -256,8 +215,8 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface WXOpenBusinessWebViewResp
     {
-        // @property (retain, nonatomic) NSString * result;
-        [Export("result", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull result;
+        [Export("result")]
         string Result { get; set; }
 
         // @property (assign, nonatomic) UInt32 businessType;
@@ -277,62 +236,28 @@ namespace WeChat
     {
     }
 
-    // @interface JumpToBizProfileReq : BaseReq
-    [BaseType(typeof(BaseReq))]
-    interface JumpToBizProfileReq
-    {
-        // @property (retain, nonatomic) NSString * username;
-        [Export("username", ArgumentSemantic.Retain)]
-        string Username { get; set; }
-
-        // @property (retain, nonatomic) NSString * extMsg;
-        [Export("extMsg", ArgumentSemantic.Retain)]
-        string ExtMsg { get; set; }
-
-        // @property (assign, nonatomic) int profileType;
-        [Export("profileType")]
-        int ProfileType { get; set; }
-    }
-
-    // @interface JumpToBizWebviewReq : BaseReq
-    [BaseType(typeof(BaseReq))]
-    interface JumpToBizWebviewReq
-    {
-        // @property (assign, nonatomic) int webType;
-        [Export("webType")]
-        int WebType { get; set; }
-
-        // @property (retain, nonatomic) NSString * tousrname;
-        [Export("tousrname", ArgumentSemantic.Retain)]
-        string Tousrname { get; set; }
-
-        // @property (retain, nonatomic) NSString * extMsg;
-        [Export("extMsg", ArgumentSemantic.Retain)]
-        string ExtMsg { get; set; }
-    }
-
     // @interface WXCardItem : NSObject
     [BaseType(typeof(NSObject))]
     interface WXCardItem
     {
-        // @property (retain, nonatomic) NSString * cardId;
-        [Export("cardId", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull cardId;
+        [Export("cardId")]
         string CardId { get; set; }
 
-        // @property (retain, nonatomic) NSString * extMsg;
-        [Export("extMsg", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable extMsg;
+        [NullAllowed, Export("extMsg")]
         string ExtMsg { get; set; }
 
         // @property (assign, nonatomic) UInt32 cardState;
         [Export("cardState")]
         uint CardState { get; set; }
 
-        // @property (retain, nonatomic) NSString * encryptCode;
-        [Export("encryptCode", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull encryptCode;
+        [Export("encryptCode")]
         string EncryptCode { get; set; }
 
-        // @property (retain, nonatomic) NSString * appID;
-        [Export("appID", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull appID;
+        [Export("appID")]
         string AppID { get; set; }
     }
 
@@ -340,24 +265,24 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXInvoiceItem
     {
-        // @property (retain, nonatomic) NSString * cardId;
-        [Export("cardId", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull cardId;
+        [Export("cardId")]
         string CardId { get; set; }
 
-        // @property (retain, nonatomic) NSString * extMsg;
-        [Export("extMsg", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable extMsg;
+        [NullAllowed, Export("extMsg")]
         string ExtMsg { get; set; }
 
         // @property (assign, nonatomic) UInt32 cardState;
         [Export("cardState")]
         uint CardState { get; set; }
 
-        // @property (retain, nonatomic) NSString * encryptCode;
-        [Export("encryptCode", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull encryptCode;
+        [Export("encryptCode")]
         string EncryptCode { get; set; }
 
-        // @property (retain, nonatomic) NSString * appID;
-        [Export("appID", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull appID;
+        [Export("appID")]
         string AppID { get; set; }
     }
 
@@ -365,9 +290,8 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface AddCardToWXCardPackageReq
     {
-        // @property (retain, nonatomic) NSArray * cardAry;
-        [Export("cardAry", ArgumentSemantic.Retain)]
-
+        // @property (nonatomic, strong) NSArray * _Nonnull cardAry;
+        [Export("cardAry", ArgumentSemantic.Strong)]
         NSObject[] CardAry { get; set; }
     }
 
@@ -375,8 +299,8 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface AddCardToWXCardPackageResp
     {
-        // @property (retain, nonatomic) NSArray * cardAry;
-        [Export("cardAry", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSArray * _Nonnull cardAry;
+        [Export("cardAry", ArgumentSemantic.Strong)]
         NSObject[] CardAry { get; set; }
     }
 
@@ -384,8 +308,8 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface WXChooseCardReq
     {
-        // @property (nonatomic, strong) NSString * appID;
-        [Export("appID", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull appID;
+        [Export("appID")]
         string AppID { get; set; }
 
         // @property (assign, nonatomic) UInt32 shopID;
@@ -396,28 +320,28 @@ namespace WeChat
         [Export("canMultiSelect")]
         uint CanMultiSelect { get; set; }
 
-        // @property (nonatomic, strong) NSString * cardType;
-        [Export("cardType", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull cardType;
+        [Export("cardType")]
         string CardType { get; set; }
 
-        // @property (nonatomic, strong) NSString * cardTpID;
-        [Export("cardTpID", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull cardTpID;
+        [Export("cardTpID")]
         string CardTpID { get; set; }
 
-        // @property (nonatomic, strong) NSString * signType;
-        [Export("signType", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull signType;
+        [Export("signType")]
         string SignType { get; set; }
 
-        // @property (nonatomic, strong) NSString * cardSign;
-        [Export("cardSign", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull cardSign;
+        [Export("cardSign")]
         string CardSign { get; set; }
 
         // @property (assign, nonatomic) UInt32 timeStamp;
         [Export("timeStamp")]
         uint TimeStamp { get; set; }
 
-        // @property (nonatomic, strong) NSString * nonceStr;
-        [Export("nonceStr", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull nonceStr;
+        [Export("nonceStr")]
         string NonceStr { get; set; }
     }
 
@@ -425,9 +349,8 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface WXChooseCardResp
     {
-        // @property (retain, nonatomic) NSArray * cardAry;
-        [Export("cardAry", ArgumentSemantic.Retain)]
-
+        // @property (nonatomic, strong) NSArray * _Nonnull cardAry;
+        [Export("cardAry", ArgumentSemantic.Strong)]
         NSObject[] CardAry { get; set; }
     }
 
@@ -435,28 +358,28 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface WXChooseInvoiceReq
     {
-        // @property (nonatomic, strong) NSString * appID;
-        [Export("appID", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull appID;
+        [Export("appID")]
         string AppID { get; set; }
 
         // @property (assign, nonatomic) UInt32 shopID;
         [Export("shopID")]
         uint ShopID { get; set; }
 
-        // @property (nonatomic, strong) NSString * signType;
-        [Export("signType", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull signType;
+        [Export("signType")]
         string SignType { get; set; }
 
-        // @property (nonatomic, strong) NSString * cardSign;
-        [Export("cardSign", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull cardSign;
+        [Export("cardSign")]
         string CardSign { get; set; }
 
         // @property (assign, nonatomic) UInt32 timeStamp;
         [Export("timeStamp")]
         uint TimeStamp { get; set; }
 
-        // @property (nonatomic, strong) NSString * nonceStr;
-        [Export("nonceStr", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull nonceStr;
+        [Export("nonceStr")]
         string NonceStr { get; set; }
     }
 
@@ -464,9 +387,8 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface WXChooseInvoiceResp
     {
-        // @property (nonatomic, strong) NSArray * cardAry;
+        // @property (nonatomic, strong) NSArray * _Nonnull cardAry;
         [Export("cardAry", ArgumentSemantic.Strong)]
-
         NSObject[] CardAry { get; set; }
     }
 
@@ -478,12 +400,12 @@ namespace WeChat
         [Export("scene")]
         uint Scene { get; set; }
 
-        // @property (nonatomic, strong) NSString * templateId;
-        [Export("templateId", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull templateId;
+        [Export("templateId")]
         string TemplateId { get; set; }
 
-        // @property (nonatomic, strong) NSString * reserved;
-        [Export("reserved", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nullable reserved;
+        [NullAllowed, Export("reserved")]
         string Reserved { get; set; }
     }
 
@@ -491,24 +413,24 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface WXSubscribeMsgResp
     {
-        // @property (nonatomic, strong) NSString * templateId;
-        [Export("templateId", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull templateId;
+        [Export("templateId")]
         string TemplateId { get; set; }
 
         // @property (assign, nonatomic) UInt32 scene;
         [Export("scene")]
         uint Scene { get; set; }
 
-        // @property (nonatomic, strong) NSString * action;
-        [Export("action", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull action;
+        [Export("action")]
         string Action { get; set; }
 
-        // @property (nonatomic, strong) NSString * reserved;
-        [Export("reserved", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull reserved;
+        [Export("reserved")]
         string Reserved { get; set; }
 
-        // @property (nonatomic, strong) NSString * openId;
-        [Export("openId", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nullable openId;
+        [NullAllowed, Export("openId")]
         string OpenId { get; set; }
     }
 
@@ -516,8 +438,8 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface WXSubscribeMiniProgramMsgReq
     {
-        // @property (nonatomic, strong) NSString * miniProgramAppid;
-        [Export("miniProgramAppid", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull miniProgramAppid;
+        [Export("miniProgramAppid")]
         string MiniProgramAppid { get; set; }
     }
 
@@ -525,16 +447,16 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface WXSubscribeMiniProgramMsgResp
     {
-        // @property (nonatomic, strong) NSString * openId;
-        [Export("openId", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull openId;
+        [Export("openId")]
         string OpenId { get; set; }
 
-        // @property (nonatomic, strong) NSString * unionId;
-        [Export("unionId", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull unionId;
+        [Export("unionId")]
         string UnionId { get; set; }
 
-        // @property (nonatomic, strong) NSString * nickName;
-        [Export("nickName", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull nickName;
+        [Export("nickName")]
         string NickName { get; set; }
     }
 
@@ -542,8 +464,8 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface WXInvoiceAuthInsertReq
     {
-        // @property (nonatomic, strong) NSString * urlString;
-        [Export("urlString", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull urlString;
+        [Export("urlString")]
         string UrlString { get; set; }
     }
 
@@ -551,44 +473,8 @@ namespace WeChat
     [BaseType(typeof(BaseResp))]
     interface WXInvoiceAuthInsertResp
     {
-        // @property (nonatomic, strong) NSString * wxOrderId;
-        [Export("wxOrderId", ArgumentSemantic.Strong)]
-        string WxOrderId { get; set; }
-    }
-
-    // @interface WXNontaxPayReq : BaseReq
-    [BaseType(typeof(BaseReq))]
-    interface WXNontaxPayReq
-    {
-        // @property (nonatomic, strong) NSString * urlString;
-        [Export("urlString", ArgumentSemantic.Strong)]
-        string UrlString { get; set; }
-    }
-
-    // @interface WXNontaxPayResp : BaseResp
-    [BaseType(typeof(BaseResp))]
-    interface WXNontaxPayResp
-    {
-        // @property (nonatomic, strong) NSString * wxOrderId;
-        [Export("wxOrderId", ArgumentSemantic.Strong)]
-        string WxOrderId { get; set; }
-    }
-
-    // @interface WXPayInsuranceReq : BaseReq
-    [BaseType(typeof(BaseReq))]
-    interface WXPayInsuranceReq
-    {
-        // @property (nonatomic, strong) NSString * urlString;
-        [Export("urlString", ArgumentSemantic.Strong)]
-        string UrlString { get; set; }
-    }
-
-    // @interface WXPayInsuranceResp : BaseResp
-    [BaseType(typeof(BaseResp))]
-    interface WXPayInsuranceResp
-    {
-        // @property (nonatomic, strong) NSString * wxOrderId;
-        [Export("wxOrderId", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull wxOrderId;
+        [Export("wxOrderId")]
         string WxOrderId { get; set; }
     }
 
@@ -596,41 +482,40 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXMediaMessage
     {
-        // +(WXMediaMessage *)message;
+        // +(WXMediaMessage * _Nonnull)message;
         [Static]
         [Export("message")]
-
         WXMediaMessage Message { get; }
 
-        // @property (retain, nonatomic) NSString * title;
-        [Export("title", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull title;
+        [Export("title")]
         string Title { get; set; }
 
-        // @property (retain, nonatomic) NSString * description;
-        [Export("description", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull description;
+        [Export("description")]
         string Description { get; set; }
 
-        // @property (retain, nonatomic) NSData * thumbData;
-        [Export("thumbData", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSData * _Nullable thumbData;
+        [NullAllowed, Export("thumbData", ArgumentSemantic.Strong)]
         NSData ThumbData { get; set; }
 
-        // @property (retain, nonatomic) NSString * mediaTagName;
-        [Export("mediaTagName", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable mediaTagName;
+        [NullAllowed, Export("mediaTagName")]
         string MediaTagName { get; set; }
 
-        // @property (retain, nonatomic) NSString * messageExt;
-        [Export("messageExt", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable messageExt;
+        [NullAllowed, Export("messageExt")]
         string MessageExt { get; set; }
 
-        // @property (retain, nonatomic) NSString * messageAction;
-        [Export("messageAction", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable messageAction;
+        [NullAllowed, Export("messageAction")]
         string MessageAction { get; set; }
 
-        // @property (retain, nonatomic) id mediaObject;
-        [Export("mediaObject", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) id _Nonnull mediaObject;
+        [Export("mediaObject", ArgumentSemantic.Strong)]
         NSObject MediaObject { get; set; }
 
-        // -(void)setThumbImage:(UIImage *)image;
+        // -(void)setThumbImage:(UIImage * _Nonnull)image;
         [Export("setThumbImage:")]
         void SetThumbImage(UIImage image);
     }
@@ -639,14 +524,13 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXImageObject
     {
-        // +(WXImageObject *)object;
+        // +(WXImageObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXImageObject Object { get; }
 
-        // @property (retain, nonatomic) NSData * imageData;
-        [Export("imageData", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSData * _Nonnull imageData;
+        [Export("imageData", ArgumentSemantic.Strong)]
         NSData ImageData { get; set; }
     }
 
@@ -654,45 +538,51 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXMusicObject
     {
-        // +(WXMusicObject *)object;
+        // +(WXMusicObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXMusicObject Object { get; }
 
-        // @property (retain, nonatomic) NSString * musicUrl;
-        [Export("musicUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull musicUrl;
+        [Export("musicUrl")]
         string MusicUrl { get; set; }
 
-        // @property (retain, nonatomic) NSString * musicLowBandUrl;
-        [Export("musicLowBandUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull musicLowBandUrl;
+        [Export("musicLowBandUrl")]
         string MusicLowBandUrl { get; set; }
 
-        // @property (retain, nonatomic) NSString * musicDataUrl;
-        [Export("musicDataUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull musicDataUrl;
+        [Export("musicDataUrl")]
         string MusicDataUrl { get; set; }
 
-        // @property (retain, nonatomic) NSString * musicLowBandDataUrl;
-        [Export("musicLowBandDataUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull musicLowBandDataUrl;
+        [Export("musicLowBandDataUrl")]
         string MusicLowBandDataUrl { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nonnull songAlbumUrl;
+        [Export("songAlbumUrl")]
+        string SongAlbumUrl { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable songLyric;
+        [NullAllowed, Export("songLyric")]
+        string SongLyric { get; set; }
     }
 
     // @interface WXVideoObject : NSObject
     [BaseType(typeof(NSObject))]
     interface WXVideoObject
     {
-        // +(WXVideoObject *)object;
+        // +(WXVideoObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXVideoObject Object { get; }
 
-        // @property (retain, nonatomic) NSString * videoUrl;
-        [Export("videoUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull videoUrl;
+        [Export("videoUrl")]
         string VideoUrl { get; set; }
 
-        // @property (retain, nonatomic) NSString * videoLowBandUrl;
-        [Export("videoLowBandUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull videoLowBandUrl;
+        [Export("videoLowBandUrl")]
         string VideoLowBandUrl { get; set; }
     }
 
@@ -700,14 +590,13 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXWebpageObject
     {
-        // +(WXWebpageObject *)object;
+        // +(WXWebpageObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXWebpageObject Object { get; }
 
-        // @property (retain, nonatomic) NSString * webpageUrl;
-        [Export("webpageUrl", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull webpageUrl;
+        [Export("webpageUrl")]
         string WebpageUrl { get; set; }
     }
 
@@ -715,22 +604,21 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXAppExtendObject
     {
-        // +(WXAppExtendObject *)object;
+        // +(WXAppExtendObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXAppExtendObject Object { get; }
 
-        // @property (retain, nonatomic) NSString * url;
-        [Export("url", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull url;
+        [Export("url")]
         string Url { get; set; }
 
-        // @property (retain, nonatomic) NSString * extInfo;
-        [Export("extInfo", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable extInfo;
+        [NullAllowed, Export("extInfo")]
         string ExtInfo { get; set; }
 
-        // @property (retain, nonatomic) NSData * fileData;
-        [Export("fileData", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSData * _Nullable fileData;
+        [NullAllowed, Export("fileData", ArgumentSemantic.Strong)]
         NSData FileData { get; set; }
     }
 
@@ -738,14 +626,13 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXEmoticonObject
     {
-        // +(WXEmoticonObject *)object;
+        // +(WXEmoticonObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXEmoticonObject Object { get; }
 
-        // @property (retain, nonatomic) NSData * emoticonData;
-        [Export("emoticonData", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSData * _Nonnull emoticonData;
+        [Export("emoticonData", ArgumentSemantic.Strong)]
         NSData EmoticonData { get; set; }
     }
 
@@ -753,18 +640,17 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXFileObject
     {
-        // +(WXFileObject *)object;
+        // +(WXFileObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXFileObject Object { get; }
 
-        // @property (retain, nonatomic) NSString * fileExtension;
-        [Export("fileExtension", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nonnull fileExtension;
+        [Export("fileExtension")]
         string FileExtension { get; set; }
 
-        // @property (retain, nonatomic) NSData * fileData;
-        [Export("fileData", ArgumentSemantic.Retain)]
+        // @property (nonatomic, strong) NSData * _Nonnull fileData;
+        [Export("fileData", ArgumentSemantic.Strong)]
         NSData FileData { get; set; }
     }
 
@@ -772,7 +658,7 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXLocationObject
     {
-        // +(WXLocationObject *)object;
+        // +(WXLocationObject * _Nonnull)object;
         [Static]
         [Export("object")]
         WXLocationObject Object { get; }
@@ -786,30 +672,43 @@ namespace WeChat
         double Lat { get; set; }
     }
 
+    // @interface WXTextObject : NSObject
+    [BaseType(typeof(NSObject))]
+    interface WXTextObject
+    {
+        // +(WXTextObject * _Nonnull)object;
+        [Static]
+        [Export("object")]
+        WXTextObject Object { get; }
+
+        // @property (copy, nonatomic) NSString * _Nonnull contentText;
+        [Export("contentText")]
+        string ContentText { get; set; }
+    }
+
     // @interface WXMiniProgramObject : NSObject
     [BaseType(typeof(NSObject))]
     interface WXMiniProgramObject
     {
-        // +(WXMiniProgramObject *)object;
+        // +(WXMiniProgramObject * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXMiniProgramObject Object { get; }
 
-        // @property (nonatomic, strong) NSString * webpageUrl;
-        [Export("webpageUrl", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull webpageUrl;
+        [Export("webpageUrl")]
         string WebpageUrl { get; set; }
 
-        // @property (nonatomic, strong) NSString * userName;
-        [Export("userName", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull userName;
+        [Export("userName")]
         string UserName { get; set; }
 
-        // @property (nonatomic, strong) NSString * path;
-        [Export("path", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nullable path;
+        [NullAllowed, Export("path")]
         string Path { get; set; }
 
-        // @property (nonatomic, strong) NSData * hdImageData;
-        [Export("hdImageData", ArgumentSemantic.Strong)]
+        // @property (nonatomic, strong) NSData * _Nullable hdImageData;
+        [NullAllowed, Export("hdImageData", ArgumentSemantic.Strong)]
         NSData HdImageData { get; set; }
 
         // @property (assign, nonatomic) BOOL withShareTicket;
@@ -819,246 +718,194 @@ namespace WeChat
         // @property (assign, nonatomic) WXMiniProgramType miniProgramType;
         [Export("miniProgramType", ArgumentSemantic.Assign)]
         WXMiniProgramType MiniProgramType { get; set; }
+
+        // @property (assign, nonatomic) BOOL disableForward;
+        [Export("disableForward")]
+        bool DisableForward { get; set; }
     }
 
     // @interface WXLaunchMiniProgramReq : BaseReq
     [BaseType(typeof(BaseReq))]
     interface WXLaunchMiniProgramReq
     {
-        // +(WXLaunchMiniProgramReq *)object;
+        // +(WXLaunchMiniProgramReq * _Nonnull)object;
         [Static]
         [Export("object")]
-
         WXLaunchMiniProgramReq Object { get; }
 
-        // @property (nonatomic, strong) NSString * userName;
-        [Export("userName", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nonnull userName;
+        [Export("userName")]
         string UserName { get; set; }
 
-        // @property (nonatomic, strong) NSString * path;
-        [Export("path", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nullable path;
+        [NullAllowed, Export("path")]
         string Path { get; set; }
 
         // @property (assign, nonatomic) WXMiniProgramType miniProgramType;
         [Export("miniProgramType", ArgumentSemantic.Assign)]
         WXMiniProgramType MiniProgramType { get; set; }
 
-        // @property (nonatomic, strong) NSString * extMsg;
-        [Export("extMsg", ArgumentSemantic.Strong)]
+        // @property (copy, nonatomic) NSString * _Nullable extMsg;
+        [NullAllowed, Export("extMsg")]
         string ExtMsg { get; set; }
+
+        // @property (copy, nonatomic) NSDictionary * _Nullable extDic;
+        [NullAllowed, Export("extDic", ArgumentSemantic.Copy)]
+        NSDictionary ExtDic { get; set; }
     }
 
     // @interface WXLaunchMiniProgramResp : BaseResp
     [BaseType(typeof(BaseResp))]
     interface WXLaunchMiniProgramResp
     {
-        // @property (retain, nonatomic) NSString * extMsg;
-        [Export("extMsg", ArgumentSemantic.Retain)]
+        // @property (copy, nonatomic) NSString * _Nullable extMsg;
+        [NullAllowed, Export("extMsg")]
         string ExtMsg { get; set; }
     }
 
-    // @interface WXTextObject : NSObject
-    [BaseType(typeof(NSObject))]
-    interface WXTextObject
+    // @interface WXOpenBusinessViewReq : BaseReq
+    [BaseType(typeof(BaseReq))]
+    interface WXOpenBusinessViewReq
     {
-        // +(WXTextObject *)object;
+        // +(WXOpenBusinessViewReq * _Nonnull)object;
         [Static]
         [Export("object")]
+        WXOpenBusinessViewReq Object { get; }
 
-        WXTextObject Object { get; }
+        // @property (copy, nonatomic) NSString * _Nonnull businessType;
+        [Export("businessType")]
+        string BusinessType { get; set; }
 
-        // @property (retain, nonatomic) NSString * contentText;
-        [Export("contentText", ArgumentSemantic.Retain)]
-        string ContentText { get; set; }
+        // @property (copy, nonatomic) NSString * _Nullable query;
+        [NullAllowed, Export("query")]
+        string Query { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable extInfo;
+        [NullAllowed, Export("extInfo")]
+        string ExtInfo { get; set; }
+
+        // @property (nonatomic, strong) NSData * _Nullable extData;
+        [NullAllowed, Export("extData", ArgumentSemantic.Strong)]
+        NSData ExtData { get; set; }
     }
 
-    /// <summary>
-    /// 接收并处理来自微信终端程序的事件消息，期间微信界面会切换到第三方应用程序。
-    /// </summary>
+    // @interface WXOpenBusinessViewResp : BaseResp
+    [BaseType(typeof(BaseResp))]
+    interface WXOpenBusinessViewResp
+    {
+        // @property (copy, nonatomic) NSString * _Nonnull businessType;
+        [Export("businessType")]
+        string BusinessType { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable extMsg;
+        [NullAllowed, Export("extMsg")]
+        string ExtMsg { get; set; }
+    }
+
     // @protocol WXApiDelegate <NSObject>
-    partial interface IWXApiDelegate { }
+    partial interface IWXApiDelegate
+    {
+
+    }
 
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WXApiDelegate
     {
-        /// <summary>
-        /// 收到一个来自微信的请求，第三方应用程序处理完后调用sendResp向微信发送结果
-        /// 可能收到的请求有GetMessageFromWXReq、ShowMessageFromWXReq等。
-        /// </summary>
-        /// <param name="req">具体请求内容，是自动释放的.</param>
-        // @optional -(void)onReq:(BaseReq *)req;
+        // @optional -(void)onReq:(BaseReq * _Nonnull)req;
         [Export("onReq:")]
         void OnReq(BaseReq req);
 
-        /// <summary>
-        /// 发送一个sendReq后，收到微信的回应
-        /// 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。
-        /// </summary>
-        /// <param name="resp">resp具体的回应内容，是自动释放的.</param>
-        // @optional -(void)onResp:(BaseResp *)resp;
+        // @optional -(void)onResp:(BaseResp * _Nonnull)resp;
         [Export("onResp:")]
         void OnResp(BaseResp resp);
     }
 
     // @protocol WXApiLogDelegate <NSObject>
-    partial interface IWXApiLogDelegate { }
+    partial interface IWXApiLogDelegate
+    {
+
+    }
 
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WXApiLogDelegate
     {
-        // @required -(void)onLog:(NSString *)log logLevel:(WXLogLevel)level;
+        // @required -(void)onLog:(NSString * _Nonnull)log logLevel:(WXLogLevel)level;
         [Abstract]
         [Export("onLog:logLevel:")]
         void LogLevel(string log, WXLogLevel level);
     }
 
-    /// <summary>
-    /// 微信Api接口函数类
-    /// </summary>
     // @interface WXApi : NSObject
     [BaseType(typeof(NSObject))]
     interface WXApi
     {
-        /// <summary>
-        /// WXApi的成员函数，向微信终端程序注册第三方应用。
-        /// 请保证在主线程中调用此函数
-        /// </summary>
-        /// <param name="appid">微信开发者ID.</param>
-        // +(BOOL)registerApp:(NSString *)appid;
+        // +(BOOL)registerApp:(NSString * _Nonnull)appid universalLink:(NSString * _Nonnull)universalLink;
         [Static]
-        [Export("registerApp:")]
-        bool RegisterApp(string appid);
+        [Export("registerApp:universalLink:")]
+        bool RegisterApp(string appid, string universalLink);
 
-        /// <summary>
-        /// WXApi的成员函数，向微信终端程序注册第三方应用。
-        /// 需要在每次启动第三方应用程序时调用。第一次调用后，会在微信的可用应用列表中出现。
-        /// </summary>
-        /// <param name="appid">微信开发者ID.</param>
-        /// <param name="isEnableMTA">是否支持MTA数据上报.</param>
-        // +(BOOL)registerApp:(NSString *)appid enableMTA:(BOOL)isEnableMTA;
-        [Static]
-        [Export("registerApp:enableMTA:")]
-        bool RegisterApp(string appid, bool isEnableMTA);
-
-        /// <summary>
-        /// WXApi的成员函数，向微信终端程序注册应用支持打开的文件类型。
-        /// </summary>
-        /// <param name="typeFlag">应用支持打开的数据类型, enAppSupportContentFlag枚举类型 “|” 操作后结果.</param>
-        // +(void)registerAppSupportContentFlag:(UInt64)typeFlag;
-        [Static]
-        [Export("registerAppSupportContentFlag:")]
-        void RegisterAppSupportContentFlag(ulong typeFlag);
-
-        /// <summary>
-        /// 处理微信通过URL启动App时传递的数据
-        /// </summary>
-        /// <returns><c>true</c>, if open URL was handled, <c>false</c> otherwise.</returns>
-        /// <param name="url">微信启动第三方应用时传递过来的URL.</param>
-        /// <param name="delegate">WXApiDelegate对象，用来接收微信触发的消息.</param>
-        // +(BOOL)handleOpenURL:(NSURL *)url delegate:(id<WXApiDelegate>)delegate;
+        // +(BOOL)handleOpenURL:(NSURL * _Nonnull)url delegate:(id<WXApiDelegate> _Nullable)delegate;
         [Static]
         [Export("handleOpenURL:delegate:")]
-        bool HandleOpenURL(NSUrl url, IWXApiDelegate @delegate);
+        bool HandleOpenURL(NSUrl url, [NullAllowed] IWXApiDelegate @delegate);
 
-        /// <summary>
-        /// 检查微信是否已被用户安装
-        /// </summary>
+        // +(BOOL)handleOpenUniversalLink:(NSUserActivity * _Nonnull)userActivity delegate:(id<WXApiDelegate> _Nullable)delegate;
+        [Static]
+        [Export("handleOpenUniversalLink:delegate:")]
+        bool HandleOpenUniversalLink(NSUserActivity userActivity, [NullAllowed] IWXApiDelegate @delegate);
+
         // +(BOOL)isWXAppInstalled;
         [Static]
         [Export("isWXAppInstalled")]
         bool IsWXAppInstalled { get; }
 
-        /// <summary>
-        /// 判断当前微信的版本是否支持OpenApi
-        /// </summary>
         // +(BOOL)isWXAppSupportApi;
         [Static]
         [Export("isWXAppSupportApi")]
         bool IsWXAppSupportApi { get; }
 
-        /// <summary>
-        /// 获取微信的itunes安装地址
-        /// </summary>
-        // +(NSString *)getWXAppInstallUrl;
+        // +(NSString * _Nonnull)getWXAppInstallUrl;
         [Static]
         [Export("getWXAppInstallUrl")]
         string WXAppInstallUrl { get; }
 
-        /// <summary>
-        /// 获取当前微信SDK的版本号
-        /// </summary>
-        // +(NSString *)getApiVersion;
+        // +(NSString * _Nonnull)getApiVersion;
         [Static]
         [Export("getApiVersion")]
         string ApiVersion { get; }
 
-        /// <summary>
-        /// 打开微信
-        /// </summary>
         // +(BOOL)openWXApp;
         [Static]
         [Export("openWXApp")]
         bool OpenWXApp { get; }
 
-        /// <summary>
-        /// 发送请求到微信，等待微信返回onResp
-        /// 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。
-        /// </summary>
-        /// <param name="req">具体的发送请求，在调用函数后，请自己释放。</param>
-        // +(BOOL)sendReq:(BaseReq *)req;
+        // +(void)sendReq:(BaseReq * _Nonnull)req completion:(void (^ _Nullable)(BOOL))completion;
         [Static]
-        [Export("sendReq:")]
-        bool SendReq(BaseReq req);
+        [Export("sendReq:completion:")]
+        void SendReq(BaseReq req, [NullAllowed] Action<bool> completion);
 
-        /// <summary>
-        /// 发送Auth请求到微信，支持用户没安装微信，等待微信返回onResp
-        /// </summary>
-        /// <param name="req">具体的发送请求，在调用函数后，请自己释放.</param>
-        /// <param name="viewController">当前界面对象.</param>
-        /// <param name="delegate">WXApiDelegate对象，用来接收微信触发的消息.</param>
-        // +(BOOL)sendAuthReq:(SendAuthReq *)req viewController:(UIViewController *)viewController delegate:(id<WXApiDelegate>)delegate;
+        // +(void)sendResp:(BaseResp * _Nonnull)resp completion:(void (^ _Nullable)(BOOL))completion;
         [Static]
-        [Export("sendAuthReq:viewController:delegate:")]
-        bool SendAuthReq(SendAuthReq req, UIViewController viewController, IWXApiDelegate @delegate);
+        [Export("sendResp:completion:")]
+        void SendResp(BaseResp resp, [NullAllowed] Action<bool> completion);
 
-        /// <summary>
-        /// 收到微信onReq的请求，发送对应的应答给微信，并切换到微信界面
-        /// </summary>
-        /// <param name="resp">具体的应答内容，调用函数后，请自己释放.</param>
-        // +(BOOL)sendResp:(BaseResp *)resp;
+        // +(void)sendAuthReq:(SendAuthReq * _Nonnull)req viewController:(UIViewController * _Nonnull)viewController delegate:(id<WXApiDelegate> _Nullable)delegate completion:(void (^ _Nullable)(BOOL))completion;
         [Static]
-        [Export("sendResp:")]
-        bool SendResp(BaseResp resp);
+        [Export("sendAuthReq:viewController:delegate:completion:")]
+        void SendAuthReq(SendAuthReq req, UIViewController viewController, [NullAllowed] IWXApiDelegate @delegate, [NullAllowed] Action<bool> completion);
 
-        /// <summary>
-        /// WXApi的成员函数，接受微信的log信息。byBlock
-        /// 注意1:SDK会强引用这个block,注意不要导致内存泄漏,注意不要导致内存泄漏
-        /// 注意2:调用过一次startLog by block之后，如果再调用一次任意方式的startLoad,会释放上一次logBlock，不再回调上一个logBlock
-        /// </summary>
-        /// <param name="level">打印log的级别.</param>
-        /// <param name="logBlock">打印log的回调block.</param>
-        // +(void)startLogByLevel:(WXLogLevel)level logBlock:(WXLogBolock)logBlock;
+        // +(void)startLogByLevel:(WXLogLevel)level logBlock:(WXLogBolock _Nonnull)logBlock;
         [Static]
         [Export("startLogByLevel:logBlock:")]
         void StartLogByLevel(WXLogLevel level, WXLogBolock logBlock);
 
-        /// <summary>
-        /// WXApi的成员函数，接受微信的log信息。byDelegate 
-        /// 注意1:sdk会弱引用这个delegate，这里可加任意对象为代理，不需要与WXApiDelegate同一个对象
-        /// 注意2:调用过一次startLog by delegate之后，再调用一次任意方式的startLoad,不会再回调上一个logDelegate对象
-        /// </summary>
-        /// <param name="level">打印log的级别.</param>
-        /// <param name="logDelegate">打印log的回调代理.</param>
-        // +(void)startLogByLevel:(WXLogLevel)level logDelegate:(id<WXApiLogDelegate>)logDelegate;
+        // +(void)startLogByLevel:(WXLogLevel)level logDelegate:(id<WXApiLogDelegate> _Nonnull)logDelegate;
         [Static]
         [Export("startLogByLevel:logDelegate:")]
         void StartLogByLevel(WXLogLevel level, IWXApiLogDelegate logDelegate);
 
-        /// <summary>
-        /// 停止打印log，会清理block或者delegate为空，释放block
-        /// </summary>
         // +(void)stopLog;
         [Static]
         [Export("stopLog")]
@@ -1066,33 +913,26 @@ namespace WeChat
     }
 
     // @protocol WechatAuthAPIDelegate <NSObject>
-    partial interface IWechatAuthAPIDelegate { }
+    partial interface IWechatAuthAPIDelegate
+    {
 
+    }
 
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface WechatAuthAPIDelegate
     {
-        /// <summary>
-        /// 得到二维码
-        /// </summary>
-        // @optional -(void)onAuthGotQrcode:(UIImage *)image;
+        // @optional -(void)onAuthGotQrcode:(UIImage * _Nonnull)image;
         [Export("onAuthGotQrcode:")]
         void OnAuthGotQrcode(UIImage image);
 
-        /// <summary>
-        /// 二维码被扫描
-        /// </summary>
         // @optional -(void)onQrcodeScanned;
         [Export("onQrcodeScanned")]
         void OnQrcodeScanned();
 
-        /// <summary>
-        /// //成功登录
-        /// </summary>
-        // @optional -(void)onAuthFinish:(int)errCode AuthCode:(NSString *)authCode;
+        // @optional -(void)onAuthFinish:(int)errCode AuthCode:(NSString * _Nullable)authCode;
         [Export("onAuthFinish:AuthCode:")]
-        void OnAuthFinish(int errCode, string authCode);
+        void OnAuthFinish(int errCode, [NullAllowed] string authCode);
     }
 
     // @interface WechatAuthSDK : NSObject
@@ -1100,38 +940,21 @@ namespace WeChat
     interface WechatAuthSDK
     {
         [Wrap("WeakDelegate")]
+        [NullAllowed]
         IWechatAuthAPIDelegate Delegate { get; set; }
 
-        // @property (nonatomic, weak) id<WechatAuthAPIDelegate> delegate;
+        // @property (nonatomic, weak) id<WechatAuthAPIDelegate> _Nullable delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
         NSObject WeakDelegate { get; set; }
 
-        /// <summary>
-        /// authSDK版本号
-        /// </summary>
-        // @property (readonly, nonatomic) NSString * sdkVersion;
+        // @property (readonly, nonatomic) NSString * _Nonnull sdkVersion;
         [Export("sdkVersion")]
         string SdkVersion { get; }
 
-        /// <summary>
-        /// 发送登录请求，等待WechatAuthAPIDelegate回调
-        /// </summary>
-        /// <returns>成功返回True，失败返回False.</returns>
-        /// <param name="appId">微信开发者ID.</param>
-        /// <param name="nonceStr">一个随机的尽量不重复的字符串，用来使得每次的signature不同.</param>
-        /// <param name="timeStamp">时间戳.</param>
-        /// <param name="scope">应用授权作用域，拥有多个作用域用逗号（,）分隔.</param>
-        /// <param name="signature">签名.</param>
-        /// <param name="schemeData">会在扫码后拼在scheme后.</param>
-        /// 该实现只保证同时只有一个Auth在运行，Auth未完成或未Stop再次调用Auth接口时会返回NO。
-        // -(BOOL)Auth:(NSString *)appId nonceStr:(NSString *)nonceStr timeStamp:(NSString *)timeStamp scope:(NSString *)scope signature:(NSString *)signature schemeData:(NSString *)schemeData;
+        // -(BOOL)Auth:(NSString * _Nonnull)appId nonceStr:(NSString * _Nonnull)nonceStr timeStamp:(NSString * _Nonnull)timeStamp scope:(NSString * _Nonnull)scope signature:(NSString * _Nonnull)signature schemeData:(NSString * _Nullable)schemeData;
         [Export("Auth:nonceStr:timeStamp:scope:signature:schemeData:")]
-        bool Auth(string appId, string nonceStr, string timeStamp, string scope, string signature, string schemeData);
+        bool Auth(string appId, string nonceStr, string timeStamp, string scope, string signature, [NullAllowed] string schemeData);
 
-        /// <summary>
-        /// 暂停登录请求
-        /// </summary>
-        /// 成功返回True，失败返回False.
         // -(BOOL)StopAuth;
         [Export("StopAuth")]
         bool StopAuth { get; }

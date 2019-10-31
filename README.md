@@ -2,13 +2,16 @@
 
 [![Version Status](https://img.shields.io/cocoapods/v/WechatOpenSDK.svg?style=flat)](http://cocoadocs.org/docsets/WechatOpenSDK)
 
-WeChat binding for Xamarin.iOS
+WeChat binding for Xamarin.iOS.
 
-Port of Xamarin iOS of the [WeChat](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html)
+Port of Xamarin iOS of the [WeChat](https://open.weixin.qq.com/).
 
 ## NuGet
 * [Xamarin.iOS.WeChat](https://www.nuget.org/packages/Xamarin.iOS.WeChat) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat)
 * [Xamarin.iOS.WeChat.NoPay](https://www.nuget.org/packages/Xamarin.iOS.WeChat.NoPay) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.NoPay.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat.NoPay)
+
+## Breaking changes!!! 
+Registration method has been refactored, upgrade to lasted version(1.8.6.1) and change your code by [Access Guide](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html).
 
 ### Features
 

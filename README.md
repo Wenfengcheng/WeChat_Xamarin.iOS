@@ -11,7 +11,8 @@ Port of Xamarin iOS of the [WeChat](https://open.weixin.qq.com/).
 * [Xamarin.iOS.WeChat.NoPay](https://www.nuget.org/packages/Xamarin.iOS.WeChat.NoPay) [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.WeChat.NoPay.svg?label=NuGet)](https://www.nuget.org/packages/Xamarin.iOS.WeChat.NoPay)
 
 ## Breaking changes!!! 
-Registration method has been refactored, upgrade to lasted version(1.8.6.1) and change your code by [Access Guide](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html).
+1. Registration method has been refactored, upgrade to lasted version(1.8.6.1) and change your code by [Access Guide](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html).
+2. Apple will stop accepting submissions of apps that use UIWebView APIs starting from April 2020, upgrade to lasted version(1.8.6.2).
 
 ### Features
 

@@ -5,9 +5,6 @@ using UIKit;
 
 namespace WeChat
 {
-    /// <summary>
-    /// 打印回调的block
-    /// </summary>
     // typedef void (^WXLogBolock)(NSString *);
     delegate void WXLogBolock(string arg0);
 

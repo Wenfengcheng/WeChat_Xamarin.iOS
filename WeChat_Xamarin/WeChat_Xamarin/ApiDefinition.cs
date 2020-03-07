@@ -5,116 +5,84 @@ using UIKit;
 
 namespace WeChat
 {
-    /// <summary>
-    /// 打印回调的block
-    /// </summary>
     // typedef void (^WXLogBolock)(NSString *);
     delegate void WXLogBolock(string arg0);
 
-    /// <summary>
-    /// 该类为微信终端SDK所有请求类的基类
-    /// </summary>
     // @interface BaseReq : NSObject
     [BaseType(typeof(NSObject))]
     interface BaseReq
     {
-        /** 请求类型 */
         // @property (assign, nonatomic) int type;
         [Export("type")]
         int Type { get; set; }
 
-        /** 由用户微信号和AppID组成的唯一标识，发送请求时第三方程序必须填写，用于校验微信用户是否换号登录*/
         // @property (retain, nonatomic) NSString * openID;
         [Export("openID")]
         string OpenID { get; set; }
     }
 
-    /// <summary>
-    /// 该类为微信终端SDK所有响应类的基类
-    /// </summary>
     // @interface BaseResp : NSObject
     [BaseType(typeof(NSObject))]
     interface BaseResp
     {
-        /** 错误码 */
         // @property (assign, nonatomic) int errCode;
         [Export("errCode")]
         int ErrCode { get; set; }
 
-        /** 错误提示字符串 */
         // @property (retain, nonatomic) NSString * errStr;
         [Export("errStr")]
         string ErrStr { get; set; }
 
-        /** 响应类型 */
         // @property (assign, nonatomic) int type;
         [Export("type")]
         int Type { get; set; }
     }
 
-    /// <summary>
-    /// 第三方向微信终端发起支付的消息结构体
-    /// </summary>
     // @interface PayReq : BaseReq
     [BaseType(typeof(BaseReq))]
     interface PayReq
     {
-        /** 商家向财付通申请的商家id */
         // @property (retain, nonatomic) NSString * partnerId;
         [Export("partnerId")]
         string PartnerId { get; set; }
 
-        /** 预支付订单 */
         // @property (retain, nonatomic) NSString * prepayId;
         [Export("prepayId")]
         string PrepayId { get; set; }
 
-        /** 随机串，防重发 */
         // @property (retain, nonatomic) NSString * nonceStr;
         [Export("nonceStr")]
         string NonceStr { get; set; }
 
-        /** 时间戳，防重发 */
         // @property (assign, nonatomic) UInt32 timeStamp;
         [Export("timeStamp")]
         uint TimeStamp { get; set; }
 
-        /** 商家根据财付通文档填写的数据和签名 */
         // @property (retain, nonatomic) NSString * package;
         [Export("package")]
         string Package { get; set; }
 
-        /** 商家根据微信开放平台文档对数据做的签名 */
         // @property (retain, nonatomic) NSString * sign;
         [Export("sign")]
         string Sign { get; set; }
     }
 
-    /// <summary>
-    /// 微信终端返回给第三方的关于支付结果的结构体
-    /// </summary>
+
     // @interface PayResp : BaseResp
     [BaseType(typeof(BaseResp))]
     interface PayResp
     {
-        /** 财付通返回给商家的信息 */
         // @property (retain, nonatomic) NSString * returnKey;
         [Export("returnKey")]
         string ReturnKey { get; set; }
     }
 
-    /// <summary>
-    /// 第三方向微信终端发起离线支付
-    /// </summary>
     // @interface WXOfflinePayReq : BaseReq
     [BaseType(typeof(BaseReq))]
     interface WXOfflinePayReq
     {
     }
 
-    /// <summary>
-    /// 第三方向微信终端发起离线支付返回
-    /// </summary>
     // @interface WXOfflinePayResp : BaseResp
     [BaseType(typeof(BaseResp))]
     interface WXOfflinePayResp
@@ -157,9 +125,6 @@ namespace WeChat
         string WxOrderId { get; set; }
     }
 
-    /// <summary>
-    /// 第三方程序要向微信申请认证，并请求某些权限，需要调用WXApi的sendReq成员函数，向微信终端发送一个SendAuthReq消息结构。微信终端处理完后会向第三方程序发送一个处理结果。
-    /// </summary>
     // @interface SendAuthReq : BaseReq
     [BaseType(typeof(BaseReq))]
     interface SendAuthReq
@@ -168,15 +133,11 @@ namespace WeChat
         [Export("scope")]
         string Scope { get; set; }
 
-        /** 第三方程序本身用来标识其请求的唯一性，最后跳转回第三方程序时，由微信终端回传。*/
         // @property (retain, nonatomic) NSString * state;
         [Export("state")]
         string State { get; set; }
     }
 
-    /// <summary>
-    /// 微信处理完第三方程序的认证和权限申请后向第三方程序回送的处理结果。
-    /// </summary>
     // @interface SendAuthResp : BaseResp
     [BaseType(typeof(BaseResp))]
     interface SendAuthResp
@@ -202,27 +163,22 @@ namespace WeChat
     [BaseType(typeof(BaseReq))]
     interface SendMessageToWXReq
     {
-        /**     发送消息的文本内容   */
         // @property (retain, nonatomic) NSString * text;
         [Export("text")]
         string Text { get; set; }
 
-        /**     发送消息的多媒体内容   */
         // @property (retain, nonatomic) WXMediaMessage * message;
         [Export("message", ArgumentSemantic.Strong)]
         WXMediaMessage Message { get; set; }
 
-        /**     发送消息的类型，包括文本消息和多媒体消息两种，两者只能选择其一，不能同时发送文本和多媒体消息   */
         // @property (assign, nonatomic) BOOL bText;
         [Export("bText")]
         bool BText { get; set; }
 
-        /**     发送的目标场景，可以选择发送到会话(WXSceneSession)或者朋友圈(WXSceneTimeline)。 默认发送到会话   */
         // @property (assign, nonatomic) int scene;
         [Export("scene")]
         int Scene { get; set; }
 
-        /**     指定发送消息的人，WXSceneSpecifiedSession时有效   */
         // @property (retain, nonatomic) NSString * toUserOpenId;
         [NullAllowed, Export("toUserOpenId")]
         string ToUserOpenId { get; set; }
@@ -930,9 +886,6 @@ namespace WeChat
         string ExtMsg { get; set; }
     }
 
-    /// <summary>
-    /// 接收并处理来自微信终端程序的事件消息，期间微信界面会切换到第三方应用程序。
-    /// </summary>
     // @protocol WXApiDelegate <NSObject>
     partial interface IWXApiDelegate { }
 
@@ -940,20 +893,10 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WXApiDelegate
     {
-        /// <summary>
-        /// 收到一个来自微信的请求，第三方应用程序处理完后调用sendResp向微信发送结果
-        /// 可能收到的请求有GetMessageFromWXReq、ShowMessageFromWXReq等。
-        /// </summary>
-        /// <param name="req">具体请求内容，是自动释放的.</param>
         // @optional -(void)onReq:(BaseReq *)req;
         [Export("onReq:")]
         void OnReq(BaseReq req);
 
-        /// <summary>
-        /// 发送一个sendReq后，收到微信的回应
-        /// 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。
-        /// </summary>
-        /// <param name="resp">resp具体的回应内容，是自动释放的.</param>
         // @optional -(void)onResp:(BaseResp *)resp;
         [Export("onResp:")]
         void OnResp(BaseResp resp);
@@ -972,9 +915,6 @@ namespace WeChat
         void LogLevel(string log, WXLogLevel level);
     }
 
-    /// <summary>
-    /// 微信Api接口函数类
-    /// </summary>
     // @interface WXApi : NSObject
     [BaseType(typeof(NSObject))]
     interface WXApi
@@ -994,41 +934,26 @@ namespace WeChat
         [Export("handleOpenUniversalLink:delegate:")]
         bool HandleOpenUniversalLink(NSUserActivity userActivity, [NullAllowed] IWXApiDelegate @delegate);
 
-        /// <summary>
-        /// 检查微信是否已被用户安装
-        /// </summary>
         // +(BOOL)isWXAppInstalled;
         [Static]
         [Export("isWXAppInstalled")]
         bool IsWXAppInstalled { get; }
 
-        /// <summary>
-        /// 判断当前微信的版本是否支持OpenApi
-        /// </summary>
         // +(BOOL)isWXAppSupportApi;
         [Static]
         [Export("isWXAppSupportApi")]
         bool IsWXAppSupportApi { get; }
 
-        /// <summary>
-        /// 获取微信的itunes安装地址
-        /// </summary>
         // +(NSString *)getWXAppInstallUrl;
         [Static]
         [Export("getWXAppInstallUrl")]
         string WXAppInstallUrl { get; }
 
-        /// <summary>
-        /// 获取当前微信SDK的版本号
-        /// </summary>
         // +(NSString *)getApiVersion;
         [Static]
         [Export("getApiVersion")]
         string ApiVersion { get; }
 
-        /// <summary>
-        /// 打开微信
-        /// </summary>
         // +(BOOL)openWXApp;
         [Static]
         [Export("openWXApp")]
@@ -1049,33 +974,16 @@ namespace WeChat
         [Export("sendAuthReq:viewController:delegate:completion:")]
         void SendAuthReq(SendAuthReq req, UIViewController viewController, [NullAllowed] IWXApiDelegate @delegate, [NullAllowed] Action<bool> completion);
 
-        /// <summary>
-        /// WXApi的成员函数，接受微信的log信息。byBlock
-        /// 注意1:SDK会强引用这个block,注意不要导致内存泄漏,注意不要导致内存泄漏
-        /// 注意2:调用过一次startLog by block之后，如果再调用一次任意方式的startLoad,会释放上一次logBlock，不再回调上一个logBlock
-        /// </summary>
-        /// <param name="level">打印log的级别.</param>
-        /// <param name="logBlock">打印log的回调block.</param>
         // +(void)startLogByLevel:(WXLogLevel)level logBlock:(WXLogBolock)logBlock;
         [Static]
         [Export("startLogByLevel:logBlock:")]
         void StartLogByLevel(WXLogLevel level, WXLogBolock logBlock);
 
-        /// <summary>
-        /// WXApi的成员函数，接受微信的log信息。byDelegate 
-        /// 注意1:sdk会弱引用这个delegate，这里可加任意对象为代理，不需要与WXApiDelegate同一个对象
-        /// 注意2:调用过一次startLog by delegate之后，再调用一次任意方式的startLoad,不会再回调上一个logDelegate对象
-        /// </summary>
-        /// <param name="level">打印log的级别.</param>
-        /// <param name="logDelegate">打印log的回调代理.</param>
         // +(void)startLogByLevel:(WXLogLevel)level logDelegate:(id<WXApiLogDelegate>)logDelegate;
         [Static]
         [Export("startLogByLevel:logDelegate:")]
         void StartLogByLevel(WXLogLevel level, IWXApiLogDelegate logDelegate);
 
-        /// <summary>
-        /// 停止打印log，会清理block或者delegate为空，释放block
-        /// </summary>
         // +(void)stopLog;
         [Static]
         [Export("stopLog")]
@@ -1090,23 +998,14 @@ namespace WeChat
     [BaseType(typeof(NSObject))]
     interface WechatAuthAPIDelegate
     {
-        /// <summary>
-        /// 得到二维码
-        /// </summary>
         // @optional -(void)onAuthGotQrcode:(UIImage *)image;
         [Export("onAuthGotQrcode:")]
         void OnAuthGotQrcode(UIImage image);
 
-        /// <summary>
-        /// 二维码被扫描
-        /// </summary>
         // @optional -(void)onQrcodeScanned;
         [Export("onQrcodeScanned")]
         void OnQrcodeScanned();
 
-        /// <summary>
-        /// //成功登录
-        /// </summary>
         // @optional -(void)onAuthFinish:(int)errCode AuthCode:(NSString * _Nullable)authCode;
         [Export("onAuthFinish:AuthCode:")]
         void OnAuthFinish(int errCode, [NullAllowed] string authCode);
@@ -1123,33 +1022,13 @@ namespace WeChat
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
         NSObject WeakDelegate { get; set; }
 
-        /// <summary>
-        /// authSDK版本号
-        /// </summary>
         // @property (readonly, nonatomic) NSString * sdkVersion;
         [Export("sdkVersion")]
         string SdkVersion { get; }
 
-        /// <summary>
-        /// 发送登录请求，等待WechatAuthAPIDelegate回调
-        /// </summary>
-        /// <returns>成功返回True，失败返回False.</returns>
-        /// <param name="appId">微信开发者ID.</param>
-        /// <param name="nonceStr">一个随机的尽量不重复的字符串，用来使得每次的signature不同.</param>
-        /// <param name="timeStamp">时间戳.</param>
-        /// <param name="scope">应用授权作用域，拥有多个作用域用逗号（,）分隔.</param>
-        /// <param name="signature">签名.</param>
-        /// <param name="schemeData">会在扫码后拼在scheme后.</param>
-        /// 该实现只保证同时只有一个Auth在运行，Auth未完成或未Stop再次调用Auth接口时会返回NO。
-        // -(BOOL)Auth:(NSString * _Nonnull)appId nonceStr:(NSString * _Nonnull)nonceStr timeStamp:(NSString * _Nonnull)timeStamp scope:(NSString * _Nonnull)scope signature:(NSString * _Nonnull)signature schemeData:(NSString * _Nullable)schemeData;
         [Export("Auth:nonceStr:timeStamp:scope:signature:schemeData:")]
         bool Auth(string appId, string nonceStr, string timeStamp, string scope, string signature, [NullAllowed] string schemeData);
 
-        /// <summary>
-        /// 暂停登录请求
-        /// </summary>
-        /// 成功返回True，失败返回False.
-        // -(BOOL)StopAuth;
         [Export("StopAuth")]
         bool StopAuth { get; }
     }

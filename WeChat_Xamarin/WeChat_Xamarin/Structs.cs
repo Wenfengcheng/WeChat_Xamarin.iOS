@@ -51,6 +51,18 @@ namespace WeChat
         Detail = 1  
     }
 
+    [Native]
+    public enum WXULCheckStep : long
+    {
+        Params,
+        SystemVersion,
+        WechatVersion,
+        SDKInnerOperation,
+        LaunchWechat,
+        BackToCurrentApp,
+        Final
+    }
+
     public enum AuthErrCode
     {
         Ok = 0,  

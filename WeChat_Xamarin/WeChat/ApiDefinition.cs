@@ -8,6 +8,30 @@ namespace WeChat
     // typedef void (^WXLogBolock)(NSString *);
     delegate void WXLogBolock(string arg0);
 
+    // @interface WXCheckULStepResult : NSObject
+    [BaseType(typeof(NSObject))]
+    interface WXCheckULStepResult
+    {
+        // @property (assign, nonatomic) BOOL success;
+        [Export("success")]
+        bool Success { get; set; }
+
+        // @property (nonatomic, strong) NSString * _Nonnull errorInfo;
+        [Export("errorInfo", ArgumentSemantic.Strong)]
+        string ErrorInfo { get; set; }
+
+        // @property (nonatomic, strong) NSString * _Nonnull suggestion;
+        [Export("suggestion", ArgumentSemantic.Strong)]
+        string Suggestion { get; set; }
+
+        // -(instancetype _Nonnull)initWithCheckResult:(BOOL)success errorInfo:(NSString * _Nullable)errorInfo suggestion:(NSString * _Nullable)suggestion;
+        [Export("initWithCheckResult:errorInfo:suggestion:")]
+        IntPtr Constructor(bool success, [NullAllowed] string errorInfo, [NullAllowed] string suggestion);
+    }
+
+    // typedef void (^WXCheckULCompletion)(WXULCheckStep, WXCheckULStepResult * _Nonnull);
+    delegate void WXCheckULCompletion(WXULCheckStep arg0, WXCheckULStepResult arg1);
+
     // @interface BaseReq : NSObject
     [BaseType(typeof(NSObject))]
     interface BaseReq
